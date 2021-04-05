@@ -1,7 +1,7 @@
 # on_connectivity_widget
 
 [![Pub.dev](https://img.shields.io/pub/v/on_connectivity_widget?color=9cf&label=Pub.dev&style=flat-square)](https://pub.dev/packages/on_connectivity_widget)
-[![Platforms](https://img.shields.io/badge/Platform-Android%20%7C%20IOS%20%7C%20Web-9cf?&style=flat-square)](https://www.android.com/)
+[![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20IOS%20%7C%20Web%20%7C%20MacOs%20%7C%20Linux%20%7C%20Windows-9cf?&style=flat-square)](https://www.android.com/)
 [![Flutter](https://img.shields.io/badge/Language-Flutter-9cf?logo=flutter&style=flat-square)](https://www.flutter.dev/)
 
 `on_connectivity_widget` is a [Flutter](https://flutter.dev/) Package used to listen network states and show a custom message to application.
