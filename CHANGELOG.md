@@ -1,3 +1,11 @@
+## [1.0.2] - [04.10.2021]
+### Features
+- Added [on_toast_widget](https://pub.dev/packages/on_toast_widget) dependency to show custom and animated messages.
+- Added `[showNoneUntilOnline]` and `[messageDurationWhenOnline]`
+
+### Documentation
+- Updated `README` documentation.
+
 ## [1.0.0] - [04.05.2021]
 ### Release
 

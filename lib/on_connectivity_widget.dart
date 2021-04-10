@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:on_toast_widget/on_toast_widget.dart';
 
 //Widget
 part 'details/on_connectivity_widget.dart';
@@ -20,6 +21,3 @@ part 'details/utils/widget_util.dart';
 part 'details/widgets/on_none_widget.dart';
 part 'details/widgets/on_mobile_widget.dart';
 part 'details/widgets/on_wifi_widget.dart';
-
-//Animations
-part 'details/animations/on_animations.dart';

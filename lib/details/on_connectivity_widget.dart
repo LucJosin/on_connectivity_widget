@@ -86,6 +86,13 @@ class OnConnectivityWidget extends StatefulWidget {
   /// * If [messageDuration] is null, will be set to [1 Second].
   final Duration? messageDuration;
 
+  /// [messageDurationWhenOnline] is used to define how long message will after [showNoneUntilOnline].
+  ///
+  /// Important:
+  ///
+  /// * If [messageDurationWhenOnline] is null, will be set to [1 Second].
+  final Duration? messageDurationWhenOnline;
+
   /// [animationType] is used to define what animation type will be shown.
   ///
   /// Important:
@@ -99,6 +106,13 @@ class OnConnectivityWidget extends StatefulWidget {
   ///
   /// * If [cancelInitState] is null, will be set to [true].
   final bool? cancelInitState;
+
+  /// [showNoneUntilOnline] is used to define if message will await until network connect.
+  ///
+  /// Important:
+  ///
+  /// * If [showNoneUntilOnline] is null, will be set to [true].
+  final bool? showNoneUntilOnline;
 
   /// [customAnimation] if you want use your own animation.
   ///
@@ -122,19 +136,21 @@ class OnConnectivityWidget extends StatefulWidget {
   ///
   /// * If [customAnimation] is't null, [animationType] need to be null.
   /// * If [customPosition] is't null, [position] need to be null.
-  const OnConnectivityWidget(
-      {Key? key,
-      this.position,
-      this.cancelInitState,
-      this.customAnimation,
-      this.customPosition,
-      this.mobileWidget,
-      this.noneWidget,
-      this.wifiWidget,
-      this.messageDuration,
-      this.animationDuration,
-      this.animationType})
-      : assert(customAnimation == null || animationType == null,
+  const OnConnectivityWidget({
+    Key? key,
+    this.position,
+    this.cancelInitState,
+    this.customAnimation,
+    this.customPosition,
+    this.mobileWidget,
+    this.noneWidget,
+    this.wifiWidget,
+    this.messageDuration,
+    this.messageDurationWhenOnline,
+    this.animationDuration,
+    this.animationType,
+    this.showNoneUntilOnline = true,
+  })  : assert(customAnimation == null || animationType == null,
             "Cannot provide both a customAnimation and a showAnimation/"),
         assert(customPosition == null || position == null,
             "Cannot provide both a customPosition and a position"),
@@ -154,26 +170,45 @@ class _OnConnectivityWidgetState extends State<OnConnectivityWidget>
 
   //
   late bool _cancelInitState;
+  bool _awaitingInNone = false;
 
   // Animation Controller.
   late AnimationController _controller = AnimationController(
       vsync: this, duration: widget.animationDuration ?? Duration(seconds: 1))
-    ..addListener(() {
-      if (_controller.isCompleted) {
-        Timer(widget.messageDuration ?? Duration(seconds: 1), () {
-          setState(() {
-            _controller.reverse();
-          });
-        });
+    ..addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        widget.showNoneUntilOnline == false
+            ? setTimerAndReverse()
+            : _connectivityResult != ConnectivityResult.none
+                ? setTimerAndReverse()
+                : _awaitingInNone = true;
       }
     });
+
+  void setTimerAndReverse() {
+    Timer(widget.messageDuration ?? Duration(seconds: 1), () {
+      setState(() {
+        _controller.reverse();
+      });
+    });
+  }
 
   // Update result everytime network changes status.
   void updateConnectivity(ConnectivityResult result) {
     setState(() {
       _connectivityResult = result;
-      _cancelInitState == false ? _controller.forward() : _controller.stop();
+      // Check awaitInNone state
+      _awaitingInNone == true
+          ? Timer(widget.messageDurationWhenOnline ?? Duration(seconds: 1), () {
+              setState(() {
+                _controller.reverse();
+              });
+            })
+          : _cancelInitState == false
+              ? _controller.forward()
+              : _controller.stop();
       _cancelInitState = false;
+      _awaitingInNone = false;
     });
   }
 
@@ -193,42 +228,45 @@ class _OnConnectivityWidgetState extends State<OnConnectivityWidget>
   @override
   void dispose() {
     super.dispose();
-    _controller.stop();
+    _controller.dispose();
     _streamSubscription.cancel();
   }
 
   @override
   Widget build(BuildContext context) {
     // Message Widget.
-    return Container(
-      // Check if [customPosition] is null, if so, will be set to [Bottom]
-      alignment: widget.customPosition ??
-          getAlignment(
-            widget.position ?? PositionType.BOTTOM,
+    // Custom Animation
+    if (widget.customAnimation != null) {
+      return Container(
+        alignment: widget.customPosition,
+        child: SlideTransition(
+          position: widget.customAnimation!,
+          child: getWidgetBasedInResult(
+            _connectivityResult,
+            widget.wifiWidget,
+            widget.mobileWidget,
+            widget.noneWidget,
           ),
-      // Widget used to create slide animation.
-      child: SlideTransition(
-        // Check if [customAnimation] is null, if so, will be set to position and animation defined before, if any.
-        position: widget.customAnimation ??
-            getAnimation(
-              widget.position ?? PositionType.BOTTOM,
-              _controller,
-              widget.animationType,
-            ),
-        // Defines what type of widget will be shown.
-        //
-        // * Wifi [OnWifiWidget.dart].
-        // * Mobile [OnMobileWidget.dart].
-        // * None [OnNoneWidget.dart].
+        ),
+      );
+    } else {
+      // TODO("Add option for others animations from [on_toast_widget]")
+      // Default Animation
+      return OnToastWidget(
+        controller: _controller,
+        animationType: widget.animationType ?? Curves.linearToEaseOut,
+        effectType: EffectType.SLIDE,
+        slidePositionType:
+            checkPosition(widget.position ?? PositionType.BOTTOM),
+        automaticallyReverse: false,
         child: getWidgetBasedInResult(
-          // Network State.
           _connectivityResult,
           widget.wifiWidget,
           widget.mobileWidget,
           widget.noneWidget,
         ),
-      ),
-    );
+      );
+    }
   }
 }
 

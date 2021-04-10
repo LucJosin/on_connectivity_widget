@@ -6,7 +6,8 @@
 
 `on_connectivity_widget` is a [Flutter](https://flutter.dev/) Package used to listen network states and show a custom message to application.
 
-This Plugin uses [connectivity_plus](https://pub.dev/packages/connectivity_plus) as dependency to listen network states.
+This Plugin uses [connectivity_plus](https://pub.dev/packages/connectivity_plus) as dependency to listen network states
+and [on_toast_widget](https://pub.dev/packages/on_toast_widget) to show custom and animated messages.
 
 ## Help:
 
@@ -36,7 +37,7 @@ NOTE: Feel free to help with readme translations
 Add the following code to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  on_connectivity_widget: ^1.0.0
+  on_connectivity_widget: ^1.0.2
 ```
 
 ## Some Features:
@@ -53,6 +54,7 @@ dependencies:
 ## TODO:
 
 * Fix bugs.
+* Add more default animations.
 * Add more `[Features]`
 
 ## How to use:
@@ -70,8 +72,10 @@ All types of parameters on this plugin:
 | `noneWidget` | `Widget?` | `Widget shown when network state is: Offline.` | <br>
 | `animationDuration` | `Duration?` | `Used to define how long animation will last.` | <br>
 | `messageDuration` | `Duration?` | `Used to define how long message will last.` | <br>
+| `messageDurationWhenOnline` | `Duration?` | `Used to define how long message will after [showNoneUntilOnline].` | <br>
 | `animationType` | `Curve?` | `Used to define what animation type will be shown.` | <br>
 | `cancelInitState` | `bool?` | `Used to define if message will shown when application starts.` | <br>
+| `showNoneUntilOnline` | `bool?` | `Used to define if message will await until network connect.` | <br>
 | `customAnimation` | `Animation<Offset>?` | `Used if you want use your own animation.` | <br>
 | `customPosition` | `Alignment?` | `Used if you want use your own position.` | <br>
 
@@ -82,26 +86,34 @@ All types of parameters on this plugin:
 #### OnConnectivityWidget
 ```dart
   OnConnectivityWidget(
-    animationDuration: Duration(seconds: 2),
-    messageDuration: Duration(seconds: 1),
+    animationDuration: Duration(seconds: 1),
+    messageDuration: Duration(seconds: 2),
     position: PositionType.BOTTOM,
+    showNoneUntilOnline: true,
+    messageDurationWhenOnline: Duration(seconds: 2),
     animationType: Curves.bounceInOut,
-    cancelInitState: true,
+    cancelInitState: false,
     wifiWidget: Container(
-    color: Colors.green,
-      child: Text("Wifi"),
+      height: 60,
+      width: double.infinity,
+      color: Colors.green,
+      child: Center(child: Text("Wifi")),
     ),
     mobileWidget: Container(
-    color: Colors.blue,
-      child: Text("Mobile"),
+      height: 60,
+      width: double.infinity,
+      color: Colors.blue,
+      child: Center(child: Text("Mobile")),
     ),
     noneWidget: Container(
-    color: Colors.red,
-      child: Text("None"),
+      height: 60,
+      width: double.infinity,
+      color: Colors.red,
+      child: Center(child: Text("None")),
     ),
     //customAnimation: null,
     //customPosition: null,
-  );
+  ),;
 ```
 
 ## LICENSE:

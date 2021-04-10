@@ -16,45 +16,22 @@ Widget getWidgetBasedInResult(ConnectivityResult _connectivityResult,
   }
 }
 
-/// Choose what position will be shown.
-Alignment getAlignment(PositionType position) {
-  switch (position.index) {
-    case 0:
-      return Alignment.topCenter;
-    case 1:
-      return Alignment.bottomCenter;
-    case 2:
-      return Alignment.topLeft;
-    case 3:
-      return Alignment.bottomLeft;
-    case 4:
-      return Alignment.topRight;
-    case 5:
-      return Alignment.bottomRight;
+SlidePositionType checkPosition(PositionType positionType) {
+  switch (positionType) {
+    case PositionType.TOP:
+      return SlidePositionType.TOP;
+    case PositionType.BOTTOM:
+      return SlidePositionType.BOTTOM;
+    case PositionType.LEFT_TOP:
+      return SlidePositionType.LEFT_TOP;
+    case PositionType.LEFT_BOTTOM:
+      return SlidePositionType.LEFT_BOTTOM;
+    case PositionType.RIGHT_TOP:
+      return SlidePositionType.RIGHT_TOP;
+    case PositionType.RIGHT_BOTTOM:
+      return SlidePositionType.RIGHT_BOTTOM;
     default:
-      throw FlutterError("PositionType returned nonexistent value\n"
-          "Report this issue on [on_connectivity_widget] Github.");
-  }
-}
-
-/// Choose what animation will be shown based in position.
-Animation<Offset> getAnimation(
-    PositionType position, AnimationController _controller, Curve? _animation) {
-  switch (position.index) {
-    case 0:
-      return onTopAnim(_controller, _animation);
-    case 1:
-      return onBottomAnim(_controller, _animation);
-    case 2:
-      return onTopAndBottomLeftAnim(_controller, _animation);
-    case 3:
-      return onTopAndBottomLeftAnim(_controller, _animation);
-    case 4:
-      return onTopAndBottomRightAnim(_controller, _animation);
-    case 5:
-      return onTopAndBottomRightAnim(_controller, _animation);
-    default:
-      throw FlutterError("Position(getAnimation) returned nonexistent value\n"
+      throw FlutterError("checkPosition returned nonexistent value\n"
           "Report this issue on [on_connectivity_widget] Github.");
   }
 }

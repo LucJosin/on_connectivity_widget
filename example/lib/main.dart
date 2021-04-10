@@ -27,7 +27,35 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("OnConnectivityExample"),
         ),
-        body: OnConnectivityWidget(position: PositionType.TOP),
+        body: OnConnectivityWidget(
+          animationDuration: Duration(seconds: 1),
+          messageDuration: Duration(seconds: 2),
+          position: PositionType.BOTTOM,
+          showNoneUntilOnline: true,
+          messageDurationWhenOnline: Duration(seconds: 2),
+          animationType: Curves.bounceInOut,
+          cancelInitState: false,
+          wifiWidget: Container(
+            height: 60,
+            width: double.infinity,
+            color: Colors.green,
+            child: Center(child: Text("Wifi")),
+          ),
+          mobileWidget: Container(
+            height: 60,
+            width: double.infinity,
+            color: Colors.blue,
+            child: Center(child: Text("Mobile")),
+          ),
+          noneWidget: Container(
+            height: 60,
+            width: double.infinity,
+            color: Colors.red,
+            child: Center(child: Text("None")),
+          ),
+          //customAnimation: null,
+          //customPosition: null,
+        ),
       ),
     );
   }
