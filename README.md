@@ -11,8 +11,8 @@ and [on_toast_widget](https://pub.dev/packages/on_toast_widget) to show custom a
 
 ## Help:
 
-**Any problem? [Issues](https://github.com/LucasPJS/on_connectivity_widget/issues)** <br>
-**Any suggestion? [Pull request](https://github.com/LucasPJS/on_connectivity_widget/pulls)**
+**Any problem? [Issues](https://github.com/LucJosin/on_connectivity_widget/issues)** <br>
+**Any suggestion? [Pull request](https://github.com/LucJosin/on_connectivity_widget/pulls)**
 
 ### Translations:
 
@@ -37,7 +37,7 @@ NOTE: Feel free to help with readme translations
 Add the following code to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  on_connectivity_widget: ^1.0.2
+  on_connectivity_widget: ^1.0.2+1
 ```
 
 ## Some Features:
@@ -118,6 +118,6 @@ All types of parameters on this plugin:
 
 ## LICENSE:
 
-* [LICENSE](https://github.com/LucasPJS/on_connectivity_widget/blob/main/LICENSE)
+* [LICENSE](https://github.com/LucJosin/on_connectivity_widget/blob/main/LICENSE)
 
 > * [Back to top](#on_connectivity_widget)

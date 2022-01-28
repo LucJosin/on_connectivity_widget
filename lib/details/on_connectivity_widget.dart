@@ -1,10 +1,15 @@
 /*
+=============
 Author: Lucas Josino
-Github: https://github.com/LucasPJS
-Package: on_connectivity_widget
-Homepage: https://github.com/LucasPJS/on_connectivity_widget
-Copyright: © 2021, Lucas Josino. All rights reserved.
-License: https://github.com/LucasPJS/on_connectivity_widget/blob/main/LICENSE
+Github: https://github.com/LucJosin
+Website: https://www.lucasjosino.com/
+=============
+Plugin/Id: on_connectivity_widget#1
+Homepage: https://github.com/LucJosin/on_connectivity_widget
+Pub: https://pub.dev/packages/on_connectivity_widget
+License: https://github.com/LucJosin/on_connectivity_widget/blob/main/LICENSE
+Copyright: © 2022, Lucas Josino. All rights reserved.
+=============
 */
 
 part of on_connectivity_widget;

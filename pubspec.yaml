@@ -1,9 +1,12 @@
 name: on_connectivity_widget
 description: Flutter Package used to listen network connection and show a custom message to application.
-version: 1.0.2
-# https://github.com/LucasPJS
+version: 1.0.2+1
+homepage: https://github.com/LucJosin/on_connectivity_widget
+# pub.dev: https://pub.dev/packages/on_connectivity_widget
+# ========
 # author: Lucas Josino
-homepage: https://github.com/LucasPJS/on_connectivity_widget
+# github: https://github.com/LucJosin
+# website: https://www.lucasjosino.com/
 
 environment:
   sdk: '>=2.12.0 <3.0.0'

@@ -10,8 +10,8 @@ Esse Plugin usa [connectivity_plus](https://pub.dev/packages/connectivity_plus) 
 
 ## Ajuda:
 
-**Algum problema? [Issues](https://github.com/LucasPJS/on_connectivity_widget/issues)** <br>
-**Alguma sugestão? [Pull request](https://github.com/LucasPJS/on_connectivity_widget/pulls)**
+**Algum problema? [Issues](https://github.com/LucJosin/on_connectivity_widget/issues)** <br>
+**Alguma sugestão? [Pull request](https://github.com/LucJosin/on_connectivity_widget/pulls)**
 
 ### Traduções:
 
@@ -36,7 +36,7 @@ NOTE: Fique à vontade para ajudar nas traduções
 Adicione o seguinte codigo para seu `pubspec.yaml`:
 ```yaml
 dependencies:
-  on_connectivity_widget: ^1.0.2
+  on_connectivity_widget: ^1.0.2+1
 ```
 
 ## Para fazer:
@@ -106,6 +106,6 @@ Todos os tipos de métodos nesse plugin:
 
 ## LICENÇA:
 
-* [LICENSE](https://github.com/LucasPJS/on_connectivity_widget/blob/main/LICENSE)
+* [LICENSE](https://github.com/LucJosin/on_connectivity_widget/blob/main/LICENSE)
 
 > * [Voltar ao Topo](#on_connectivity_widget)
