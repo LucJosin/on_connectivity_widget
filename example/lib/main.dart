@@ -1,20 +1,29 @@
 /*
+=============
 Author: Lucas Josino
-Github: https://github.com/LucasPJS
-Package: on_connectivity_widget
-Homepage: https://github.com/LucasPJS/on_connectivity_widget
-Copyright: © 2021, Lucas Josino. All rights reserved.
-License: https://github.com/LucasPJS/on_connectivity_widget/blob/main/LICENSE
+Github: https://github.com/LucJosin
+Website: https://www.lucasjosino.com/
+=============
+Plugin/Id: on_connectivity_widget#1
+Homepage: https://github.com/LucJosin/on_connectivity_widget
+Pub: https://pub.dev/packages/on_connectivity_widget
+License: https://github.com/LucJosin/on_connectivity_widget/blob/main/LICENSE
+Copyright: © 2022, Lucas Josino. All rights reserved.
+=============
 */
 
 import 'package:flutter/material.dart';
 import 'package:on_connectivity_widget/on_connectivity_widget.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    const MyApp(),
+  );
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -25,33 +34,46 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("OnConnectivityExample"),
+          title: const Text("OnConnectivityWidgetExample"),
         ),
         body: OnConnectivityWidget(
-          animationDuration: Duration(seconds: 1),
-          messageDuration: Duration(seconds: 2),
-          position: PositionType.BOTTOM,
+          animationDuration: const Duration(seconds: 1),
+          messageDuration: const Duration(seconds: 2),
+          position: SlidePositionType.BOTTOM,
           showNoneUntilOnline: true,
-          messageDurationWhenOnline: Duration(seconds: 2),
+          messageDurationWhenOnline: const Duration(seconds: 2),
           animationType: Curves.bounceInOut,
           cancelInitState: false,
-          wifiWidget: Container(
-            height: 60,
-            width: double.infinity,
+          // All default messages.
+          bluetoothWidget: OnMessageWidget(
+            title: 'You\'re online',
+            desc: 'Your current connection is: Bluetooth',
+            color: Colors.lightBlue[200]!,
+            icon: Icons.check_circle_outline_rounded,
+          ),
+          wifiWidget: const OnMessageWidget(
+            title: 'You\'re online',
+            desc: 'Your current connection is: Wifi',
             color: Colors.green,
-            child: Center(child: Text("Wifi")),
+            icon: Icons.check_circle_outline_rounded,
           ),
-          mobileWidget: Container(
-            height: 60,
-            width: double.infinity,
+          ethernetWidget: OnMessageWidget(
+            title: 'You\'re online',
+            desc: 'Your current connection is: Ethernet',
+            color: Colors.lightGreen[200]!,
+            icon: Icons.check_circle_outline_rounded,
+          ),
+          mobileWidget: const OnMessageWidget(
+            title: 'You\'re online',
+            desc: 'Your current connection is: Mobile',
             color: Colors.blue,
-            child: Center(child: Text("Mobile")),
+            icon: Icons.check_circle_outline_rounded,
           ),
-          noneWidget: Container(
-            height: 60,
-            width: double.infinity,
+          noneWidget: const OnMessageWidget(
+            title: 'You\'re offline',
+            desc: 'Your current connection is: Offline',
             color: Colors.red,
-            child: Center(child: Text("None")),
+            icon: Icons.error_outline_rounded,
           ),
           //customAnimation: null,
           //customPosition: null,

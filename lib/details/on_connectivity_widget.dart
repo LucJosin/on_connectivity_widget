@@ -24,12 +24,20 @@ part of on_connectivity_widget;
 /// OnConnectivityWidget(
 ///   animationDuration: Duration(seconds: 2),
 ///   messageDuration: Duration(seconds: 1),
-///   position: PositionType.BOTTOM,
+///   position: SlidePositionType.BOTTOM,
 ///   animationType: Curves.bounceInOut,
 ///   cancelInitState: true,
+///   bluetoothWidget: Container(
+///     color: Colors.lightGreen,
+///     child: Text("Bluetooth"),
+///   ),
 ///   wifiWidget: Container(
 ///     color: Colors.green,
 ///     child: Text("Wifi"),
+///   ),
+///   ethernetWidget: Container(
+///     color: Colors.lightBlue,
+///     child: Text("Ethernet"),
 ///   ),
 ///   mobileWidget: Container(
 ///     color: Colors.blue,
@@ -54,7 +62,14 @@ class OnConnectivityWidget extends StatefulWidget {
   /// Important:
   ///
   /// * If [position] is null, will be set to [Bottom].
-  final PositionType? position;
+  final SlidePositionType? position;
+
+  /// [bluetoothWidget] the Widget shown when network state is: Bluetooth.
+  ///
+  /// Important:
+  ///
+  /// * If [bluetoothWidget] is null, will be set to [OnBluetoothWidget].
+  final Widget? bluetoothWidget;
 
   /// [wifiWidget] the Widget shown when network state is: Wifi.
   ///
@@ -62,6 +77,13 @@ class OnConnectivityWidget extends StatefulWidget {
   ///
   /// * If [wifiWidget] is null, will be set to [OnWifiWidget].
   final Widget? wifiWidget;
+
+  /// [EthernetWidget] the Widget shown when network state is: Ethernet.
+  ///
+  /// Important:
+  ///
+  /// * If [EthernetWidget] is null, will be set to [OnEthernetWidget].
+  final Widget? ethernetWidget;
 
   /// [mobileWidget] the Widget shown when network state is: Mobile.
   ///
@@ -143,13 +165,15 @@ class OnConnectivityWidget extends StatefulWidget {
   /// * If [customPosition] is't null, [position] need to be null.
   const OnConnectivityWidget({
     Key? key,
+    this.bluetoothWidget,
+    this.mobileWidget,
+    this.ethernetWidget,
+    this.noneWidget,
+    this.wifiWidget,
     this.position,
     this.cancelInitState,
     this.customAnimation,
     this.customPosition,
-    this.mobileWidget,
-    this.noneWidget,
-    this.wifiWidget,
     this.messageDuration,
     this.messageDurationWhenOnline,
     this.animationDuration,
@@ -178,9 +202,10 @@ class _OnConnectivityWidgetState extends State<OnConnectivityWidget>
   bool _awaitingInNone = false;
 
   // Animation Controller.
-  late AnimationController _controller = AnimationController(
-      vsync: this, duration: widget.animationDuration ?? Duration(seconds: 1))
-    ..addStatusListener((status) {
+  late final AnimationController _controller = AnimationController(
+    vsync: this,
+    duration: widget.animationDuration ?? const Duration(seconds: 1),
+  )..addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         widget.showNoneUntilOnline == false
             ? setTimerAndReverse()
@@ -191,7 +216,7 @@ class _OnConnectivityWidgetState extends State<OnConnectivityWidget>
     });
 
   void setTimerAndReverse() {
-    Timer(widget.messageDuration ?? Duration(seconds: 1), () {
+    Timer(widget.messageDuration ?? const Duration(seconds: 1), () {
       setState(() {
         _controller.reverse();
       });
@@ -204,7 +229,9 @@ class _OnConnectivityWidgetState extends State<OnConnectivityWidget>
       _connectivityResult = result;
       // Check awaitInNone state
       _awaitingInNone == true
-          ? Timer(widget.messageDurationWhenOnline ?? Duration(seconds: 1), () {
+          ? Timer(
+              widget.messageDurationWhenOnline ?? const Duration(seconds: 1),
+              () {
               setState(() {
                 _controller.reverse();
               });
@@ -248,9 +275,11 @@ class _OnConnectivityWidgetState extends State<OnConnectivityWidget>
           position: widget.customAnimation!,
           child: getWidgetBasedInResult(
             _connectivityResult,
-            widget.wifiWidget,
-            widget.mobileWidget,
-            widget.noneWidget,
+            bluetoothWidget: widget.bluetoothWidget,
+            wifiWidget: widget.wifiWidget,
+            ethernetWidget: widget.ethernetWidget,
+            mobileWidget: widget.mobileWidget,
+            noneWidget: widget.noneWidget,
           ),
         ),
       );
@@ -261,14 +290,15 @@ class _OnConnectivityWidgetState extends State<OnConnectivityWidget>
         controller: _controller,
         animationType: widget.animationType ?? Curves.linearToEaseOut,
         effectType: EffectType.SLIDE,
-        slidePositionType:
-            checkPosition(widget.position ?? PositionType.BOTTOM),
+        slidePositionType: widget.position ?? SlidePositionType.BOTTOM,
         automaticallyReverse: false,
         child: getWidgetBasedInResult(
           _connectivityResult,
-          widget.wifiWidget,
-          widget.mobileWidget,
-          widget.noneWidget,
+          bluetoothWidget: widget.bluetoothWidget,
+          wifiWidget: widget.wifiWidget,
+          ethernetWidget: widget.ethernetWidget,
+          mobileWidget: widget.mobileWidget,
+          noneWidget: widget.noneWidget,
         ),
       );
     }

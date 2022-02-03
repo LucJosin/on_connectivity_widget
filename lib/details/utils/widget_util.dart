@@ -1,37 +1,54 @@
 part of on_connectivity_widget;
 
 /// Choose what widget will be shown based in network state.
-Widget getWidgetBasedInResult(ConnectivityResult _connectivityResult,
-    Widget? wifiWidget, Widget? mobileWidget, Widget? noneWidget) {
+Widget getWidgetBasedInResult(
+  ConnectivityResult _connectivityResult, {
+  Widget? bluetoothWidget,
+  Widget? wifiWidget,
+  Widget? ethernetWidget,
+  Widget? mobileWidget,
+  Widget? noneWidget,
+}) {
   switch (_connectivityResult.index) {
     case 0:
-      return wifiWidget ?? OnWifiWidget();
+      return bluetoothWidget ??
+          OnMessageWidget(
+            title: 'You\'re online',
+            desc: 'Your current connection is: Bluetooth',
+            color: Colors.lightBlue[200]!,
+            icon: Icons.check_circle_outline_rounded,
+          );
     case 1:
-      return mobileWidget ?? OnMobileWidget();
+      return wifiWidget ??
+          const OnMessageWidget(
+            title: 'You\'re online',
+            desc: 'Your current connection is: Wifi',
+            color: Colors.green,
+            icon: Icons.check_circle_outline_rounded,
+          );
     case 2:
-      return noneWidget ?? OnNoneWidget();
+      return ethernetWidget ??
+          OnMessageWidget(
+            title: 'You\'re online',
+            desc: 'Your current connection is: Ethernet',
+            color: Colors.lightGreen[200]!,
+            icon: Icons.check_circle_outline_rounded,
+          );
+    case 3:
+      return mobileWidget ??
+          const OnMessageWidget(
+            title: 'You\'re online',
+            desc: 'Your current connection is: Mobile',
+            color: Colors.blue,
+            icon: Icons.check_circle_outline_rounded,
+          );
     default:
-      throw FlutterError("CoonnectivityResult returned nonexistent value\n"
-          "Report this issue on [on_connectivity_widget] Github.");
-  }
-}
-
-SlidePositionType checkPosition(PositionType positionType) {
-  switch (positionType) {
-    case PositionType.TOP:
-      return SlidePositionType.TOP;
-    case PositionType.BOTTOM:
-      return SlidePositionType.BOTTOM;
-    case PositionType.LEFT_TOP:
-      return SlidePositionType.LEFT_TOP;
-    case PositionType.LEFT_BOTTOM:
-      return SlidePositionType.LEFT_BOTTOM;
-    case PositionType.RIGHT_TOP:
-      return SlidePositionType.RIGHT_TOP;
-    case PositionType.RIGHT_BOTTOM:
-      return SlidePositionType.RIGHT_BOTTOM;
-    default:
-      throw FlutterError("checkPosition returned nonexistent value\n"
-          "Report this issue on [on_connectivity_widget] Github.");
+      return noneWidget ??
+          const OnMessageWidget(
+            title: 'You\'re offline',
+            desc: 'Your current connection is: Offline',
+            color: Colors.red,
+            icon: Icons.error_outline_rounded,
+          );
   }
 }

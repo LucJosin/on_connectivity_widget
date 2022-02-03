@@ -1,3 +1,23 @@
+## [1.1.0] - [02.03.2022]
+### Features
+- **[Added]** `bluetoothWidget` and `ethernetWidget` to `OnConnectivityWidget`.
+
+### Fixes
+- **[Fixed]** `FlutterError` due old `connectivity_plus` version. - [#01](https://github.com/LucJosin/on_connectivity_widget/issues/1)
+
+### Documentation
+- **[Updated]** `README` documentation.
+- **[Created]** `DEPRECATED` file/history.
+
+### Changes
+- **[Updated]** `connectivity_plus` and `on_toast_widget` versions.
+
+### ⚠ Important Changes
+- Now the parameter `position` from `OnConnectivityWidget` recive `SlidePositionType` instead of `PositionType`.
+
+#### [@Deprecated](https://github.com/LucJosin/on_connectivity_widget/DEPRECATED.md)
+- `[PositionType]`.
+
 ## [1.0.2+1] - [01.28.2022]
 ### Changes
 - **[Updated]** all Github links.
@@ -19,8 +39,8 @@
 ### Features
 - **[Added]** [connectivity_plus](https://pub.dev/packages/connectivity_plus) dependency to listen network states.
 - **[Added]** `[OnConnectivityWidget]` to show message when state change.
-- **[Added]** `[OnWifiWidget]`, `[OnMobileWidget]` and `[OnNoneWidget]` as default widgets.
-- **[Added]** `[PositionType]` to define message position.
+~~- **[Added]** `[OnWifiWidget]`, `[OnMobileWidget]` and `[OnNoneWidget]` as default widgets.~~
+~~- **[Added]** `[PositionType]` to define message position.~~
 
 ### Documentation
 - **[Updated]** `README` documentation.
@@ -46,6 +66,14 @@
 ### Changes
 - TODO
 
-### Important Changes
+### ⚠ Important Changes
+#### @**Deprecated**
 - TODO
  -->
+
+<!-- 
+ https://github.com/LucJosin/on_audio_query/issues/
+ - **[Added]** (Text)- [#Issue](Link)
+ - **[Fixed]** (Text)- [#Issue](Link)
+ - **[Changed]** (Text)- [#Issue](Link)
+-->

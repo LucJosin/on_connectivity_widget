@@ -21,6 +21,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:on_toast_widget/on_toast_widget.dart';
 
+export 'package:on_toast_widget/on_toast_widget.dart';
+
 //Widget
 part 'details/on_connectivity_widget.dart';
 
@@ -31,6 +33,4 @@ part 'details/types/position_types.dart';
 part 'details/utils/widget_util.dart';
 
 //Default Widgets
-part 'details/widgets/on_none_widget.dart';
-part 'details/widgets/on_mobile_widget.dart';
-part 'details/widgets/on_wifi_widget.dart';
+part 'details/widgets/on_message_widget.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 part of on_connectivity_widget;
 
 /// Define message position in application.
@@ -11,6 +13,7 @@ part of on_connectivity_widget;
 /// * [RIGHT_TOP]
 /// * [RIGHT_BOTTOM]
 ///
+@Deprecated('Deprecated after [1.1.0]. Use [SlidePositionType] instead')
 enum PositionType {
   /// Top of application.
   ///

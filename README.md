@@ -37,7 +37,7 @@ NOTE: Feel free to help with readme translations
 Add the following code to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  on_connectivity_widget: ^1.0.2+1
+  on_connectivity_widget: ^1.1.0
 ```
 
 ## Some Features:
@@ -66,8 +66,10 @@ All types of parameters on this plugin:
 
 |  Parameters  |   Arguments   |   Description   |
 |--------------|-----------------|-----------------|
-| `position` | `PositionType?` | `Used to define message position` | <br>
+| `position` | `SlidePositionType?` | `Used to define message position` | <br>
+| `bluetoothWidget` | `Widget?` | `Widget shown when connection state is: Bluetooth.` | <br>
 | `wifiWidget` | `Widget?` | `Widget shown when network state is: Wifi.` | <br>
+| `ethernetWidget` | `Widget?` | `Widget shown when network state is: Ethernet.` | <br>
 | `mobileWidget` | `Widget?` | `Widget shown when network state is: Mobile` | <br>
 | `noneWidget` | `Widget?` | `Widget shown when network state is: Offline.` | <br>
 | `animationDuration` | `Duration?` | `Used to define how long animation will last.` | <br>
@@ -88,28 +90,40 @@ All types of parameters on this plugin:
   OnConnectivityWidget(
     animationDuration: Duration(seconds: 1),
     messageDuration: Duration(seconds: 2),
-    position: PositionType.BOTTOM,
+    position: SlidePositionType.BOTTOM,
     showNoneUntilOnline: true,
     messageDurationWhenOnline: Duration(seconds: 2),
     animationType: Curves.bounceInOut,
     cancelInitState: false,
-    wifiWidget: Container(
-      height: 60,
-      width: double.infinity,
+    bluetoothWidget: OnMessageWidget(
+      title: 'You\'re online',
+      desc: 'Your current connection is: Bluetooth',
+      color: Colors.lightBlue[200]!,
+      icon: Icons.check_circle_outline_rounded,
+    ),
+    wifiWidget: const OnMessageWidget(
+      title: 'You\'re online',
+      desc: 'Your current connection is: Wifi',
       color: Colors.green,
-      child: Center(child: Text("Wifi")),
+      icon: Icons.check_circle_outline_rounded,
     ),
-    mobileWidget: Container(
-      height: 60,
-      width: double.infinity,
+    ethernetWidget: OnMessageWidget(
+      title: 'You\'re online',
+      desc: 'Your current connection is: Ethernet',
+      color: Colors.lightGreen[200]!,
+      icon: Icons.check_circle_outline_rounded,
+    ),
+    mobileWidget: const OnMessageWidget(
+      title: 'You\'re online',
+      desc: 'Your current connection is: Mobile',
       color: Colors.blue,
-      child: Center(child: Text("Mobile")),
+      icon: Icons.check_circle_outline_rounded,
     ),
-    noneWidget: Container(
-      height: 60,
-      width: double.infinity,
+    noneWidget: const OnMessageWidget(
+      title: 'You\'re offline',
+      desc: 'Your current connection is: Offline',
       color: Colors.red,
-      child: Center(child: Text("None")),
+      icon: Icons.error_outline_rounded,
     ),
     //customAnimation: null,
     //customPosition: null,
