@@ -1,6 +1,8 @@
 ## [1.1.0] - [02.03.2022]
 ### Features
 - **[Added]** `bluetoothWidget` and `ethernetWidget` to `OnConnectivityWidget`.
+- **[Added]** a [`DART ANALYZER`](https://github.com/axel-op/dart-package-analyzer/) to `PULL_REQUEST` and `PUSH`.
+- **[Added]** `flutter_lints`.
 
 ### Fixes
 - **[Fixed]** `FlutterError` due old `connectivity_plus` version. - [#01](https://github.com/LucJosin/on_connectivity_widget/issues/1)
@@ -15,7 +17,7 @@
 ### ⚠ Important Changes
 - Now the parameter `position` from `OnConnectivityWidget` recive `SlidePositionType` instead of `PositionType`.
 
-#### [@Deprecated](https://github.com/LucJosin/on_connectivity_widget/DEPRECATED.md)
+#### [@Deprecated](https://github.com/LucJosin/on_connectivity_widget/blob/main/CHANGELOG.md)
 - `[PositionType]`.
 
 ## [1.0.2+1] - [01.28.2022]
